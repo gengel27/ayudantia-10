@@ -1,0 +1,38 @@
+---
+title: "Ayudantia 10"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(e1071)
+library(caret)
+library(caTools)
+library(rstan)
+library(rstanarm)
+
+credit <- read.csv("/Users/gabrielengel/Downloads/Ayudantia_DataMining01_2021-main 2/Ayudantia 10/UCI_Credit_Card.csv")
+
+
+```
+
+````{r}
+sample <- sample(1:nrow(credit), size=round(0.7*nrow(credit)), replace=FALSE)
+
+train <- credit[sample,]  
+test <- credit[-sample,] 
+
+credit <- train
+glimpse(train)
+
+credit<- credit[c(2,4:25)]
+str(credit)
+
+`````
+
+````{r}
+credit_linear <- stan_glm(default.payment.next.month ~ AGE + EDUCATION, data = credit, family = gaussian())
+
+
+model_nb <- naiveBayes(default.payment.next.month ~ AGE + EDUCATION, credit, laplace=1)      
+`````
