@@ -1,2 +1,0 @@
-# ayudantia 10
- 
